@@ -36,6 +36,7 @@ class CustomerCode(models.Model):
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
+    restriction_month = fields.Boolean(string="Restriction One Month")
     is_cash = fields.Boolean(string="Is Cash Customer")
     record_id = fields.Char(string="Record ID", required=True, copy=False, readonly=True, default=lambda self: _('New'))
     name_id = fields.Char(string="Customer ID", readonly=True)

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError, ValidationError
@@ -52,6 +53,11 @@ class AccountMove(models.Model):
 
     @api.onchange('partner_id')
     def onchange_partner_id(self):
+        if self.partner_id.restriction_month:
+            check = self.search([('state', '=', 'posted'), ('payment_state', '!=', 'not_paid'),
+                                ('invoice_date', '<=', datetime.datetime.today() - datetime.timedelta(days=30))])
+            if check:
+                raise ValidationError("Please Clear Your Dues, since invoice is pending for more than 30 days......!")
         var_customer_name = self.env['customer.name']
         var_customer_code = self.env['customer.code']
         for rec in self:
