@@ -1,0 +1,23 @@
+{
+    'name': 'MD',
+    'version':  '14.0.1.0.0',
+    'category': 'Misc',
+    'author':   'AB',
+    'website':  'www.ab.com',
+    'license':  'AGPL-3',
+    'summary':  'Misc. Customization',
+    'description':  """Misc. Customization""",
+    'depends': ['base', 'stock', 'mrp'],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/price_list_extend.xml',
+        'views/res_partner_inherit_form.xml',
+        'views/manufacturing_inherit.xml',
+        'views/stock_picking_form_inherit.xml',
+    ],
+    'demo': [],
+    'qweb': [],
+    'installable':  True,
+    'application':  True,
+    'auto_install': False,
+}

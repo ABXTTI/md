@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_price_list_extend,access_price_list_extend,model_price_list_extend,,1,1,1,1
+access_price_list_extend_line,access_price_list_extend_line,model_price_list_extend_line,,1,1,1,1

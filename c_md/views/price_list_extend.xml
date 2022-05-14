@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_price_list_extend_tree">
+        <field name="name">view.price.list.extend.tree</field>
+        <field name="model">price.list.extend</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string="Description"/>
+                <field name="date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_price_list_extend_form">
+        <field name="name">view.price.list.extend.form</field>
+        <field name="model">price.list.extend</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object" class="btn-primary" attrs="{'invisible': ['|', ('state', 'not in', 'draft'), ('id', '=', False)]}"/>
+                    <button name="action_expired" string="Expire" type="object" attrs="{'invisible': [('state', 'not in', 'running')]}"/>
+                    <button name="action_reset" string="Reset" type="object" attrs="{'invisible': [('state', 'not in', 'expired')]}"/>
+                    <button name="action_select_all_products" string="Select All Products" type="object" attrs="{'invisible': [('state', 'not in', 'draft')]}"/>
+                    <button name="action_clear_products" string="Clear All Products" type="object" attrs="{'invisible': [('state', 'not in', 'draft')]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,running,expired"/>
+                </header>
+                <group>
+                    <group>
+                        <field name="name" string="Description"/>
+                        <field name="date"/>
+                        <field name="customers_A" widget="many2many_tags" domain="[('id', '!=', customers_B),
+                                                                                    ('id', '!=', customers_C),
+                                                                                    ('id', '!=', customers_D),
+                                                                                    ('id', '!=', customers_E),
+                                                                                    ('id', '!=', customers_F),
+                                                                                    ('customer_rank', '>', '0')]"/>
+                        <field name="customers_B" widget="many2many_tags" domain="[('id', '!=', customers_A),
+                                                                                    ('id', '!=', customers_C),
+                                                                                    ('id', '!=', customers_D),
+                                                                                    ('id', '!=', customers_E),
+                                                                                    ('id', '!=', customers_F),
+                                                                                    ('customer_rank', '>', '0')]"/>
+                        <field name="customers_C" widget="many2many_tags" domain="[('id', '!=', customers_A),
+                                                                                    ('id', '!=', customers_B),
+                                                                                    ('id', '!=', customers_D),
+                                                                                    ('id', '!=', customers_E),
+                                                                                    ('id', '!=', customers_F),
+                                                                                    ('customer_rank', '>', '0')]"/>
+                        <field name="customers_D" widget="many2many_tags" domain="[('id', '!=', customers_A),
+                                                                                    ('id', '!=', customers_B),
+                                                                                    ('id', '!=', customers_C),
+                                                                                    ('id', '!=', customers_E),
+                                                                                    ('id', '!=', customers_F),
+                                                                                    ('customer_rank', '>', '0')]"/>
+                        <field name="customers_E" widget="many2many_tags" domain="[('id', '!=', customers_A),
+                                                                                    ('id', '!=', customers_B),
+                                                                                    ('id', '!=', customers_C),
+                                                                                    ('id', '!=', customers_D),
+                                                                                    ('id', '!=', customers_F),
+                                                                                    ('customer_rank', '>', '0')]"/>
+                        <field name="customers_F" widget="many2many_tags" domain="[('id', '!=', customers_A),
+                                                                                    ('id', '!=', customers_B),
+                                                                                    ('id', '!=', customers_C),
+                                                                                    ('id', '!=', customers_D),
+                                                                                    ('id', '!=', customers_E),
+                                                                                    ('customer_rank', '>', '0')]"/>
+                        <button name="assign_customers" class="btn-primary" string="Assign Customers" type="object" attrs="{'invisible': [('state', 'not in', 'draft')]}"/>
+                    </group>
+                </group>
+                <field name="line_ids">
+                    <tree editable="bottom" create="1" edit="1" import="0" js_class="singleton_list" sample="1">
+                        <field name="product_id" style="width:200px"  domain="[('sale_ok', '=', True), ('type', '=', 'product')]"/>
+                        <field name="price_A"/>
+                        <field name="price_B"/>
+                        <field name="price_C"/>
+                        <field name="price_D"/>
+                        <field name="price_E"/>
+                        <field name="price_F"/>
+                        <field name="partner_id_A" widget="many2many_tags" domain="[('id', '!=', partner_id_B),
+                                                                                    ('id', '!=', partner_id_C),
+                                                                                    ('id', '!=', partner_id_D),
+                                                                                    ('id', '!=', partner_id_E),
+                                                                                    ('id', '!=', partner_id_F),
+                                                                                    ('customer_rank', '>', '0')]"/>
+                        <field name="partner_id_B" widget="many2many_tags" domain="[('id', '!=', partner_id_A),
+                                                                                    ('id', '!=', partner_id_C),
+                                                                                    ('id', '!=', partner_id_D),
+                                                                                    ('id', '!=', partner_id_E),
+                                                                                    ('id', '!=', partner_id_F),
+                                                                                    ('customer_rank', '>', '0')]"/>
+                        <field name="partner_id_C" widget="many2many_tags" domain="[('id', '!=', partner_id_A),
+                                                                                    ('id', '!=', partner_id_B),
+                                                                                    ('id', '!=', partner_id_D),
+                                                                                    ('id', '!=', partner_id_E),
+                                                                                    ('id', '!=', partner_id_F),
+                                                                                    ('customer_rank', '>', '0')]"/>
+                        <field name="partner_id_D" widget="many2many_tags" domain="[('id', '!=', partner_id_A),
+                                                                                    ('id', '!=', partner_id_B),
+                                                                                    ('id', '!=', partner_id_C),
+                                                                                    ('id', '!=', partner_id_E),
+                                                                                    ('id', '!=', partner_id_F),
+                                                                                    ('customer_rank', '>', '0')]"/>
+                        <field name="partner_id_E" widget="many2many_tags" domain="[('id', '!=', partner_id_A),
+                                                                                    ('id', '!=', partner_id_B),
+                                                                                    ('id', '!=', partner_id_C),
+                                                                                    ('id', '!=', partner_id_D),
+                                                                                    ('id', '!=', partner_id_F),
+                                                                                    ('customer_rank', '>', '0')]"/>
+                        <field name="partner_id_F" widget="many2many_tags" domain="[('id', '!=', partner_id_A),
+                                                                                    ('id', '!=', partner_id_B),
+                                                                                    ('id', '!=', partner_id_C),
+                                                                                    ('id', '!=', partner_id_D),
+                                                                                    ('id', '!=', partner_id_E),
+                                                                                    ('customer_rank', '>', '0')]"/>
+                    </tree>
+                </field>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_price_list_extend" model="ir.actions.act_window">
+            <field name="name">Price List Extend</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">price.list.extend</field>
+            <field name="view_mode">tree,kanban,form,pivot,graph,activity</field>
+<!--            <field name="search_view_id" ref="sale_order_view_search_inherit_sale"/>-->
+            <field name="context">{}</field>
+<!--            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field>-->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new quotation, the first step of a new sale!
+                </p><p>
+                    Once the quotation is confirmed, it becomes a sales order.<br/> You will be able to create an invoice and collect the payment.
+                </p>
+            </field>
+    </record>
+
+
+
+    <menuitem
+        id="menu_price_list_extend"
+        name="Price List Extend"
+        action="action_price_list_extend"
+        parent="point_of_sale.pos_config_menu_catalog"
+        sequence="10"
+    />
+
+
+</odoo>
